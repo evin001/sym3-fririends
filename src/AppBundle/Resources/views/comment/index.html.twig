@@ -1,0 +1,25 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-8 float-none center-block">
+            <h2>{{ 'New comment'|trans }}</h2>
+
+            {% include "@App/flash.html.twig" %}
+
+            {{ form_start(form, {'method': 'post'}) }}
+            {{ form_widget(form) }}
+
+            <input type="submit" class="btn btn-default" value="{{ 'Save'|trans }}" id="save">
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var addCommentUrl = '{{ url('ajax_comment_add') }}';
+    </script>
+    <script src="{{ asset('assets/js/comment.js') }}"></script>
+{% endblock %}

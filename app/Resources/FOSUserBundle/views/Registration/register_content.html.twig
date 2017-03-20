@@ -1,0 +1,14 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="row">
+    <div class="col-md-5 float-none center-block">
+        <h1>{{ 'layout.register'|trans }}</h1>
+        {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+        {{ form_widget(form) }}
+
+        <input class="btn btn-default" type="submit" value="{{ 'registration.submit'|trans }}" />
+
+        {% include "@App/social.html.twig" %}
+{{ form_end(form) }}
+    </div>
+</div>

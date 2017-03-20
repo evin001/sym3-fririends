@@ -1,0 +1,53 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>{{ 'Friend list'|trans }}</h2>
+            {% for friend in friends %}
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        {% if friend['firstName'] %}
+                            {{ friend['firstName'] }} {{ friend['lastName'] }}
+                        {% else %}
+                            {{ friend['username'] }}
+                        {% endif %}
+
+                        ({{ friend['email'] }})
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% if friends is empty %}
+                <div class="alert alert-warning">
+                    {{ 'Empty friends list'|trans }}
+                    <a href="{{ url('user_list') }}">
+                        {{ 'User list'|trans }}
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-lg-6">
+            <h2>{{ 'Comment'|trans }}</h2>
+
+            {% for comment in comments %}
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        {% if comment['firstName'] %}
+                            {{ comment['firstName'] }} {{ comment['lastName'] }}
+                        {% else %}
+                            {{ comment['username'] }}
+                        {% endif %}
+
+                        {{ comment['createAt'].format('d.m.Y H:i:s') }}
+                    </div>
+                    <div class="panel-body">
+                        {% autoescape %}
+                            {{ comment['text']|raw }}
+                        {% endautoescape %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

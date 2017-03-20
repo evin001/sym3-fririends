@@ -1,0 +1,26 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h1>{{ 'User list'|trans }}</h1>
+
+    {% include "@App/flash.html.twig" %}
+
+    {% for user in userList %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                {% if user['firstName'] %}
+                    {{ user['firstName'] }} {{ user['lastName'] }}
+                {% else %}
+                    {{ user['username'] }}
+                {% endif %}
+
+                {% if user['id'] not in userFriend %}
+                    <a href="{{ url('user_add_friend', {'id': user['id']}) }}">
+                        Добавить в друзья
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
